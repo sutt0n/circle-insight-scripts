@@ -1,3 +1,3 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 pip freeze > requirements.txt

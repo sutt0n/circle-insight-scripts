@@ -1,0 +1,7 @@
+[main]
+CIRCLE_TOKEN = circle-api-token-here
+VCS = github/bitbucket
+ORG = username-or-organization
+REPO = repo-name
+DEPLOY_WORKFLOW = deploy-workflow-name
+BUILD_WORKFLOW = build-workflow-name

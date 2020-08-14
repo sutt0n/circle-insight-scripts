@@ -14,7 +14,7 @@ ORG = cfg['main']['ORG']
 REPO = cfg['main']['REPO']
 IGNORE_BRANCHES = ['develop']
 MAX_PAGES = 20
-WORKFLOW = 'build-and-deploy'
+WORKFLOW = cfg['main']['BUILD_WORKFLOW']
 
 headers = {
     'Circle-Token': CIRCLE_TOKEN
@@ -38,21 +38,24 @@ branches = np.unique(branches)
 
 insightData = []
 
+# get branch insights
 for branch in branches:
     response = requests.get(
         'https://circleci.com/api/v2/insights/' + VCS + '/' + ORG + '/' + REPO + '/workflows/' + WORKFLOW + '?circle-token='+CIRCLE_TOKEN+'&branch='+branch)
     branchInsightResp = response.json()
-
     insightData = insightData + branchInsightResp['items']
 
+# only want successful deploys
 successfulDeploys = [
     item for item in insightData if item['status'] == 'success']
 
+# aggregated date k/v
 for item in successfulDeploys:
     startedDate = datetime.datetime.strptime(
         item['created_at'], '%Y-%m-%dT%H:%M:%S.%fZ')
     item['date'] = startedDate.strftime('%m/%d')
 
+# sort by date, asc order
 successfulDeploys = sorted(
     successfulDeploys, key=lambda i: i['date'], reverse=True)
 
