@@ -1,3 +1,7 @@
+## Insight Scripts
+
+CircleCI doesn't provide great visuals on where credits go, how much you use over time, and if our changes in its config impact our usage negatively (or positively). To address this problem, I created a few simple Python scripts. Now, I'm by no means a Python programmer - it just had easy access to graphing libraries; so, if you see something you can improve, feel free to open a PR.
+
 ## Before Running
 
 - Rename `main.cfg.rename` to `main.cfg`
